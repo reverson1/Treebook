@@ -13,4 +13,13 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me, 
   # :first_name, :last_name, :profile_name  
+  has_many :statuses
+
+  def self.authenticate_safely(user_id, password)
+    where("user_id= ? AND password = ?", user_id, password).first
+  end
+
+  def fullname
+    first_name + ' ' + last_name
+  end
 end

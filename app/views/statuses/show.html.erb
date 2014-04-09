@@ -2,7 +2,13 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @status.name %>
+  <strong>
+  <% if !@status || !@status.user %>
+    Unknown
+  <% else %>
+    <%= status.user.fullname %>
+  <% end %>
+</strong>
 </p>
 
 <p>
