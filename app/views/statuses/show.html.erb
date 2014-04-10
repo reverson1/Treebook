@@ -1,20 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <strong>
-  <% if !@status || !@status.user %>
-    Unknown
-  <% else %>
-    <%= status.user.fullname %>
-  <% end %>
-</strong>
-</p>
+<div class="row">
+	<div class="span12">
+		<div class="well">
+			<p>
+			  <strong>Name:</strong>
+			  <strong>
+			  <% if !@status || !@status.user %>
+			    Unknown
+			  <% else %>
+			    <%= @status.user.fullname %>
+			  <% end %>
+			</strong>
+			</p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @status.content %>
-</p>
-
-<%= link_to 'Edit', edit_status_path(@status) %> |
-<%= link_to 'Back', statuses_path %>
+			<p>
+		  		<strong>Content:</strong>
+		  		<%= @status.content %>
+			</p>
+		</div>
+	</div>
+</div>
+<div align="center">
+	<div class="btn-group" > 
+		<%= link_to 'Edit', edit_status_path(@status), :class => 'btn btn-primary'  %>
+	</div>
+	<div class="btn-group" > 	
+		<%= link_to 'Cancel', statuses_path, :class => 'btn btn-primary'  %>
+	</div>
+</div>
