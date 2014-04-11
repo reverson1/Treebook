@@ -1,6 +1,6 @@
 <div class="row">
   	<div class="span12">
-  		<div class="well">
+  		<div class="status-index">
 			<%= simple_form_for(@status, html: {class: "form-horizontal"}) do |f| %>
 				<% if @status.errors.any? %>
 					<div id="error_explanation">
@@ -13,12 +13,12 @@
 					  </ul>
 					</div>
 				<% end %>
-				<fieldset>
-		        	<legend>New Status</legend>
+				<fieldset class="well">
+		        	<legend class="treebook-header">New Status</legend>
 				  	<%= f.input :user_id, collection: User.all, label_method: :fullname, :autofocus => true%>  
 				  	<%= f.input :content %>
 				</fieldset>
-				<div align="center" class="form-actions-center">
+				<div align="center">
 			    	<%= f.button :submit, :class => 'btn btn-primary' %>
 			    	<%= link_to 'Cancel', @status, :class => 'btn btn-primary'  %>
 			  	</div>
