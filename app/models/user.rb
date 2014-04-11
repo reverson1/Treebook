@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
   # :first_name, :last_name, :profile_name  
   has_many :statuses
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :profile_name, presence: true,
+                           uniqueness: true
+
+
   def self.authenticate_safely(user_id, password)
     where("user_id= ? AND password = ?", user_id, password).first
   end
