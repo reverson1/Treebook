@@ -16,7 +16,7 @@
 				<fieldset>
 		        	<legend>Edit Status</legend>
 				  	<%= f.input :user_id, collection: User.all, label_method: :fullname, :autofocus => true%>  
-				  	<%= f.input :content %>
+				  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'} %>
 				</fieldset>
 				<div align="center" class="form-actions-center">
 			    	<%= f.button :submit, :class => 'btn btn-primary' %>

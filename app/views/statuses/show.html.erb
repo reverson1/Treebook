@@ -18,11 +18,13 @@
 				</p>			
 			</fieldset>
 			<div align="center">
-				<div class="btn-group" > 
-					<%= link_to 'Edit', edit_status_path(@status), :class => 'btn btn-primary'  %>
-				</div>
+				<% if user_signed_in? %>
+					<div class="btn-group" > 
+						<%= link_to 'Edit', edit_status_path(@status), :class => 'btn btn-primary'  %>
+					</div>
+				<% end %>
 				<div class="btn-group" > 	
-					<%= link_to 'Cancel', statuses_path, :class => 'btn btn-primary'  %>
+					<%= link_to 'Done', statuses_path, :class => 'btn btn-primary'  %>
 				</div>
 			</div>
 		</div>

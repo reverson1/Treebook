@@ -1,5 +1,5 @@
 class UsersController < ActionController::Base
-
+ 
   def create
     @user = User.new(user_params)
     @user.first_name = params[:user][:first_name]

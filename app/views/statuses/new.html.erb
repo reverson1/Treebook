@@ -5,7 +5,6 @@
 				<% if @status.errors.any? %>
 					<div id="error_explanation">
 					  <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
-
 					  <ul>
 					  <% @status.errors.full_messages.each do |msg| %>
 					    <li><%= msg %></li>
@@ -16,7 +15,7 @@
 				<fieldset class="well">
 		        	<legend class="treebook-header">New Status</legend>
 				  	<%= f.input :user_id, collection: User.all, label_method: :fullname, :autofocus => true%>  
-				  	<%= f.input :content %>
+				  	<%= f.input :content,:input_html => {:rows => 15, :style => 'width: 90%'} %>
 				</fieldset>
 				<div align="center">
 			    	<%= f.button :submit, :class => 'btn btn-primary' %>
