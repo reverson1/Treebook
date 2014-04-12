@@ -3,11 +3,6 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -21,9 +16,12 @@ class User < ActiveRecord::Base
   
   validates :email, presence: true, uniqueness: true
   
-  validates :profile_name, presence: true, uniqueness: true, format: {
-                            with: /\A[a-zA-Z\-\_]+\Z/,
-                            message: 'Must be formatted correctly'
+  validates :profile_name, presence: true, 
+                            uniqueness: true, 
+                            format: {
+                              with: /^[a-zA-Z0-9_-]+$/,
+                              :multiline => true,
+                              message: 'Must be formatted correctly'
                            }      
 
   def fullname
