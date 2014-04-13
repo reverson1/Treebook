@@ -1,3 +1,4 @@
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -26,5 +27,13 @@ class User < ActiveRecord::Base
 
   def fullname
     first_name + ' ' + last_name
+  end
+
+  def gravatar_url
+    email_strip = email.strip
+    downcase_email = email_strip.downcase    
+    hash = Digest::MD5.hexdigest(downcase_email)
+    
+    "http://gravatar.com/avatar/#{hash}"
   end
 end

@@ -2,8 +2,12 @@
 
 one:
   content: MyText
-  user: "Richard"
+  user: richard
 
 two:
   content: MyText
-  user: "Richard"
+  user: richard
+
+three:
+  content: "Jim's MyText"
+  user: jim

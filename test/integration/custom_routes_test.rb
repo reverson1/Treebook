@@ -17,9 +17,8 @@ class CustomRoutesTest < ActionDispatch::IntegrationTest
 	 	assert_response :success
 	 end	 
 
-	 test "that /feed route opens the status list" do
-	 	get '/feed'
-	 	assert_response :redirect
-	 	assert_redirected_to '/users/sign_in'
-	 end	
+	 test "that a profile page works" do
+	 	get '/richard'
+	 	assert_response :success
+	 end
 end
