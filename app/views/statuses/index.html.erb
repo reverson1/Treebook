@@ -1,46 +1,76 @@
-<div class="row" style="padding: 40px 12px">
-  <div class="status-index span12">
-    <h2>Pile of Leaves</h2>
+  <div class="row">
+  <div class="span12">
     <% if @statuses %>
     <% if @statuses.count > 0 %>
-    <% @statuses.each do |status| %>
-    <div class="well">           
-      <div class="status row">   
-          <div class="span2">
-            <img src="<%=status.user.gravatar_url %>"/>
-          </div>
-          <div class="span8">
-            <strong>
-              <% if !status || !status.user %>
-              Unknown
-              <% else %>
-              <%= status.user.fullname %>
-              <% end %>
-            </strong>
-            <br/>
-            <p><%= status.content %></p>
-            <div class="meta">
-              <br/>
-              <%= link_to time_ago_in_words(status.created_at) + " ago", status ,:class => 'btn btn-primary btn-mini' %>
-              <% if user_signed_in? %>
-              <span class="admin">
-                <%= link_to "Edit", edit_status_path(status),:class => 'btn btn-primary btn-mini' %>
-                <%= link_to "Rake", status, method: :delete, data: { confirm: "Are you sure you want to delete this entry?"},:class => 'btn btn-primary btn-mini' %>
-              </span>
-              <% end %>
+      <div class="status-index">
+        <h2>Pile of Leaves</h2>
+        <% @statuses.each do |status| %>
+          <div class="well">           
+              <div class="status row">
+                <div class="span2">
+                  <img src="<%=status.user.gravatar_url %>"/>
+                </div>
+                <div class="span8">              
+                  <strong>
+                    <% if !status || !status.user %>
+                      Unknown
+                    <% else %>
+                      <%= status.user.fullname %>
+                    <% end %>
+                  </strong>
+                  <p><%= status.content %></p>
+                  <div class="meta">
+                    <%= link_to time_ago_in_words(status.created_at) + " ago", status ,:class => 'btn btn-primary btn-mini' %>
+                    <% if user_signed_in? %>
+                      <span class="admin">
+                        <%= link_to "Edit", edit_status_path(status),:class => 'btn btn-primary btn-mini' %>
+                        <%= link_to "Rake", status, method: :delete, data: { confirm: "Are you sure you want to delete this entry?"},:class => 'btn btn-primary btn-mini' %>
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
             </div>
           </div>
+        <% end %>
+          
+        <div align="center">
+          <%= link_to "Post a New Leave", new_status_path, class: "btn btn-success" %>
         </div>
-
-    </div>
-      <% end %>
-      <% end %>
-
-      <% if user_signed_in? %>
-      <div align="center">
-        <%= link_to "Post a New Leave", new_status_path, class: "btn btn-success" %>
       </div>
-      <% end %>
-      <% end %>
-    </div>
-  </div>
+    <% else %>
+      <div class="span2"><br/></div>
+      <div class="status-index span8">
+        <br/>
+        <div align="center">
+          <br/>
+          <h1>Welcome to Treebook!</h1>
+          <br/>
+          <% if user_signed_in? %>
+              <h2><%= @user.fullname %></h2>
+              <br/>             
+            <% end %>
+            <br />
+          <table width="80%">
+            <tr>
+              <td align="right">
+                <%= link_to 'View Other Leaves', feed_path, {:class => 'btn btn-primary btn-large'} %>
+              </td>
+              <td/>
+              <td align="left"/>
+                <% if user_signed_in? %>
+                    <%= link_to "Leave Your Own", new_status_path, class: "btn btn-success btn-large" %>
+                  <% else %>
+                  <%= link_to 'Leave Your Own', login_path, {:class => 'btn btn-primary btn-large'} %>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+          <br/>
+          <br/>
+        </div>
+      </div>
+      <div class="span2"><br/></div>
+    <% end %>
+    <% end %>
+</div>
+</div>       
