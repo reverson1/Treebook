@@ -50,7 +50,7 @@
           <h1>Welcome to Treebook!</h1>
           <br/>
           <% if user_signed_in? %>
-              <h2><%= @user.fullname %></h2>
+              <h2><%= current_user.fullname %></h2>
               <br/>             
             <% end %>
             <br />
