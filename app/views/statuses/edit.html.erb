@@ -14,7 +14,6 @@
 			</div>
 		<% end %>
 		<fieldset>
-		  	<%= f.input :user_id, collection: User.all, label_method: :fullname, :autofocus => true%>  
 		  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'} %>
 		</fieldset>
 		<div align="center" class="form-actions-center">

@@ -14,8 +14,8 @@
 			</div>
 		<% end %>
 		<fieldset>
-		  	<%= f.input :user_id, collection: User.all, label_method: :fullname, :autofocus => true%>  
-		  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'} %>
+		  	<%= f.input :user_id, :input_html => { :value => current_user.id}, :as => :hidden %>  
+		  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'}, :autofocus => true%>
 		</fieldset>
 		<div align="center" class="form-actions-center">
 	    	<%= f.submit 'Submit New Leave', :class => 'btn btn-primary' %>

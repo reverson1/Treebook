@@ -8,7 +8,11 @@
           <div class="well">           
               <div class="status row">
                 <div class="span2">
-                  <img src="<%=status.user.gravatar_url %>"/>
+                    <% if !status || !status.user %>
+                      <img src="http://gravatar.com/avatar"/>
+                    <% else %>
+                      <img src="<%=status.user.gravatar_url %>"/>
+                    <% end %>            
                 </div>
                 <div class="span8">              
                   <strong>

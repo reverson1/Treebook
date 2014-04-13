@@ -303,6 +303,7 @@ a:focus {
 
 .span10 {
   width: 780px;
+   word-wrap: break-word;
 }
 
 .span9 {
