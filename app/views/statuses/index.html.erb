@@ -1,6 +1,15 @@
+<%
+  if params && params[:id] 
+    @user = User.find_by_profile_name(params[:id])
+    if @user
+      @statuses = @user.statuses.all(:order => 'created_at DESC')
+    end
+  end
+%>
 <div class="row">
   <div class="span12">
     <% if current_user && @statuses && @statuses.count > 0 %>
+
       <div class="status-index">
         <% if params && params[:id] && user_signed_in? %>
           <h2><%= current_user.fullname %></h2>
