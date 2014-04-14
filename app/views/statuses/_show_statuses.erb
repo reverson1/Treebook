@@ -20,7 +20,7 @@
 			                  
 			                  <div class="meta">
 			                    <%= link_to time_ago_in_words(status.created_at) + " ago", status ,:class => 'btn btn-primary btn-mini' %>
-			                    <% if user_signed_in? %>
+			                    <% if user_signed_in? && status.user_id == current_user.id %>
 			                      <span class="admin">
 			                        <%= link_to "Edit", edit_status_path(status),:class => 'btn btn-primary btn-mini' %>
 			                        <%= link_to "Rake", status, method: :delete, data: { confirm: "Are you sure you want to delete this entry?"},:class => 'btn btn-primary btn-mini' %>
@@ -33,5 +33,5 @@
 				<% end %>
 				
 				<div align="center">
-		          <%= link_to "Post a New Leave", new_status_path, class: "btn btn-success" %>
+		          <%= link_to "Post a New Leaf", new_status_path, class: "btn btn-success" %>
 		        </div>
