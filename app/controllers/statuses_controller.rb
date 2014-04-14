@@ -76,7 +76,11 @@ class StatusesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_status
-      @status = Status.find(params[:id])
+      begin
+        @status = Status.find(params[:id])
+      rescue ActiveRecord::RecordNotFound  
+       redirect_to "new_user_session_path"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

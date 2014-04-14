@@ -14,7 +14,7 @@
           <table width="80%">
             <tr>
               <td align="center"><table><tr>
-              <% if @statuses && @statuses.count > 0 %>
+              <% if @statuses && @statuses.count > 0 && user_signed_in? %>
                 <td align="right">
                   <%= link_to 'View Other Leaves', feed_path, {:class => 'btn btn-primary btn-large'} %>
                 </td>
