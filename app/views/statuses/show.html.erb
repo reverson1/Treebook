@@ -18,9 +18,9 @@
 				</p>			
 			</fieldset>
 			<div align="center">
-				<% if user_signed_in? %>
+				<% if user_signed_in? && @status && current_user && @status.user_id == current_user.id %>
 					<div class="btn-group" > 
-						<%= link_to 'Edit Leave', edit_status_path(@status), :class => 'btn btn-primary'  %>
+						<%= link_to 'Edit Leaf', edit_status_path(@status), :class => 'btn btn-primary'  %>
 					</div>
 				<% end %>
 				<div class="btn-group" > 	
