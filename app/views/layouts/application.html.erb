@@ -13,10 +13,11 @@
 
 				<% if user_signed_in? %>
 					<a href="<%= '../' + current_user.profile_name %>" class="brand"> Treebook</a>
+					<%= link_to 'All Leaves', feed_path , :class => 'btn btn-primary'  %>
 				<% else %>
 					<a href="<%= register_path %>" class="brand"> Treebook</a>
 				<% end %>
-				<%= link_to 'All Leaves', feed_path , :class => 'btn btn-primary'  %>
+
 				<ul class="nav pull-right">
 					<% if user_signed_in? %>
 						<%= link_to "Post a New Leaf", new_status_path, class: "btn btn-success" %>		        
