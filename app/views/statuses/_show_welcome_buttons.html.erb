@@ -26,6 +26,7 @@
                 <% if user_signed_in? %>
                     <%= link_to "Create a Leaf", new_status_path, class: "btn btn-success btn-large" %>
                   <% else %>
+                  <%= link_to 'Register', register_path, {:class => 'btn btn-primary btn-large'} %>
                   <%= link_to 'Log in', login_path, {:class => 'btn btn-primary btn-large'} %>
                 <% end %>
               </td>
