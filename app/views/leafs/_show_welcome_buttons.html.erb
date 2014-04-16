@@ -1,6 +1,6 @@
 <div class="span2"><br/></div>
 <div class="span8">
-        <div class="status-index">
+        <div class="leaf-index">
         <br/>
         <div align="center">
           <br/>
@@ -14,9 +14,9 @@
           <table width="80%">
             <tr>
               <td align="center"><table><tr>
-              <% if @statuses && @statuses.count > 0 && user_signed_in? %>
+              <% if @leafs && @leafs.count > 0 && user_signed_in? %>
                 <td align="right">
-                  <%= link_to 'View Other Leaves', feed_path, {:class => 'btn btn-primary btn-large'} %>
+                  <%= link_to 'View Other Leafs', feed_path, {:class => 'btn btn-primary btn-large'} %>
                 </td>
                 <td/> 
                 <td align="left"/>
@@ -24,7 +24,7 @@
                 <td align="center"/>
               <% end %>
                 <% if user_signed_in? %>
-                    <%= link_to "Create a Leaf", new_status_path, class: "btn btn-success btn-large" %>
+                    <%= link_to "Create a Leaf", new_leaf_path, class: "btn btn-success btn-large" %>
                   <% else %>
                   <%= link_to 'Register', register_path, {:class => 'btn btn-primary btn-large'} %>
                   <%= link_to 'Log in', login_path, {:class => 'btn btn-primary btn-large'} %>

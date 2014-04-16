@@ -1,6 +1,6 @@
-class CreateStatuses < ActiveRecord::Migration
+class CreateLeafs < ActiveRecord::Migration
   def change
-    create_table :statuses do |t|
+    create_table :leafs do |t|
       t.string :name
       t.text :content
 

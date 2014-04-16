@@ -1,30 +1,30 @@
 <div class="row">
 	<div class="span12">
-		<div class="status-index">
+		<div class="leaf-index">
 			<fieldset class="well">
 		        <legend class="treebook-header">View Leave</legend>			
 				<strong>Name:</strong>
 				<strong>
-				  <% if !@status || !@status.user %>
+				  <% if !@leaf || !@leaf.user %>
 				    Unknown
 				  <% else %>
-				    <%= @status.user.fullname %>
+				    <%= @leaf.user.fullname %>
 				  <% end %>
 				</strong>
 
 				<p>
 			  		<strong>Content:</strong>
-			  		<%= @status.content %>
+			  		<%= @leaf.content %>
 				</p>			
 			</fieldset>
 			<div align="center">
-				<% if user_signed_in? && @status && current_user && @status.user_id == current_user.id %>
+				<% if user_signed_in? && @leaf && current_user && @leaf.user_id == current_user.id %>
 					<div class="btn-group" > 
-						<%= link_to 'Edit Leaf', edit_status_path(@status), :class => 'btn btn-primary'  %>
+						<%= link_to 'Edit Leaf', edit_leaf_path(@leaf), :class => 'btn btn-primary'  %>
 					</div>
 				<% end %>
 				<div class="btn-group" > 	
-					<%= link_to 'Done', statuses_path, :class => 'btn btn-primary'  %>
+					<%= link_to 'Done', leafs_path, :class => 'btn btn-primary'  %>
 				</div>
 			</div>
 		</div>

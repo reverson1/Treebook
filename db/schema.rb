@@ -13,14 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20140409182549) do
 
-  create_table "statuses", force: true do |t|
+  create_table "leafs", force: true do |t|
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
   end
 
-  add_index "statuses", ["user_id"], name: "index_statuses_on_user_id"
+  add_index "leafs", ["user_id"], name: "index_leafs_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"

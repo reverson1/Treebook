@@ -8,11 +8,11 @@ Treebook::Application.routes.draw do
     get 'logout', to: 'devise/sessions#destroy', as: :logout
   end
 
-  resources :statuses
-  get 'feed', to: 'statuses#index', as: :feed
-  root :to => 'statuses#index'
+  resources :leafs
+  get 'feed', to: 'leafs#index', as: :feed
+  root :to => 'leafs#index'
 
-  get '/:id', to:'statuses#index'
+  get '/:id', to:'leafs#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

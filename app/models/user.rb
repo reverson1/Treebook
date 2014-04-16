@@ -1,4 +1,3 @@
-
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -10,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
                   :first_name, :last_name, :profile_name  
 
-  has_many :statuses, :dependent => :destroy
+  has_many :leafs, :dependent => :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true

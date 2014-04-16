@@ -1,0 +1,33 @@
+				<% @leafs.each do |leaf| %>
+					<div class="well">           
+              			<div class="leaf row">
+			                <div class="span2">
+			                    <% if !leaf || !leaf.user %>
+			                      <img src="http://gravatar.com/avatar"/>
+			                    <% else %>
+			                      <img src="<%=leaf.user.gravatar_url %>"/>
+			                    <% end %>            
+			                </div>
+			                <div class="span8">              
+			                  <strong>
+			                    <% if !leaf || !leaf.user %>
+			                      Unknown
+			                    <% else %>
+			                      <%= leaf.user.fullname %>
+			                    <% end %>
+			                  </strong>
+			                  <p><%= leaf.content %></p>
+			                  
+			                  <div class="meta">
+			                    <%= link_to time_ago_in_words(leaf.created_at) + " ago", leaf ,:class => 'btn btn-primary btn-mini' %>
+			                    <% if user_signed_in? && leaf.user_id == current_user.id %>
+			                      <span class="admin">
+			                        <%= link_to "Edit", edit_leaf_path(leaf),:class => 'btn btn-primary btn-mini' %>
+			                        <%= link_to "Rake", leaf, method: :delete, data: { confirm: "Are you sure you want to delete this entry?"},:class => 'btn btn-primary btn-mini' %>
+			                      </span>
+			                    <% end %>
+			                  </div>
+			                </div>
+            			</div>
+          			</div>
+				<% end %>			

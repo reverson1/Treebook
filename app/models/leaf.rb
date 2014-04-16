@@ -1,4 +1,4 @@
-class Status < ActiveRecord::Base
+class Leaf < ActiveRecord::Base
 	belongs_to :user 
 	attr_accessible :content, :user_id
 

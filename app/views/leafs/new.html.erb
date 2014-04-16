@@ -1,13 +1,13 @@
 <div class="row">
-    <div class="status-index span12">
+    <div class="leaf-index span12">
     <h2>New Leaf</h2>
-	<%= simple_form_for(@status, html: {class: "form-horizontal"}) do |f| %>
-		<% if @status.errors.any? %>
+	<%= simple_form_for(@leaf, html: {class: "form-horizontal"}) do |f| %>
+		<% if @leaf.errors.any? %>
 			<div id="error_explanation">
-			  <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
+			  <h2><%= pluralize(@leaf.errors.count, "error") %> prohibited this leaf from being saved:</h2>
 
 			  <ul>
-			  <% @status.errors.full_messages.each do |msg| %>
+			  <% @leaf.errors.full_messages.each do |msg| %>
 			    <li><%= msg %></li>
 			  <% end %>
 			  </ul>
