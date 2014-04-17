@@ -7,6 +7,42 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<%
+		# get the user and set the leafs
+	  if params && params[:id] 
+	    @user = User.find_by_profile_name(params[:id])
+	    if @user
+	      @leafs = @user.leafs.all(:order => 'created_at DESC')
+	    end
+	  end
+
+	  # this is necessary because vanity_path is undefined if a profile_name isn't provided
+	  begin
+	  	vanity = vanity_path
+	  rescue
+	  	vanity = ""
+	  end
+		
+		# check the path - show login or registration buttons?
+	  case request.path
+	  when new_user_registration_path, user_registration_path, register_path 
+	  	show_registration = false
+	  	show_login = true
+	  	show_create_a_leaf = false
+	  when new_user_session_path, login_path
+	  	show_login = false
+	  	show_registration = true
+	  	show_create_a_leaf = false
+	  when new_leaf_path, root_path, vanity, feed_path
+	  	show_registration = !@leafs || @leafs.count == 0
+	  	show_login = false
+	  	show_create_a_leaf = user_signed_in?
+	  else
+	  	show_registration = false
+	  	show_login = false
+	  	show_create_a_leaf = false
+	  end
+	%>
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">		
 			<div class="container">
@@ -19,41 +55,42 @@
 				<% end %>
 
 				<ul class="nav pull-right">
-					<% if user_signed_in? %>
-						<%= link_to "Post a New Leaf", new_leaf_path, class: "btn btn-success" %>		        
+					<% if show_create_a_leaf %>
+						<%= link_to "Create a New Leaf", new_leaf_path, class: "btn btn-success" %>		
+					<% end %>
+					<% if user_signed_in? %>       
 						<div class="btn-group">		          			
-			                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.fullname %> <span class="caret"></span></button>
-			                <ul class="dropdown-menu">
-							  <li><%= link_to 'My Leafs', '../' + current_user.profile_name %></li>
-			                  <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
-			                  <li><%= link_to 'Log out', logout_path %></li>
-			                </ul>
-              			</div>												
+							<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.fullname %> <span class="caret"></span></button>
+							<ul class="dropdown-menu">
+								<li><%= link_to 'My Leafs', '../' + current_user.profile_name %></li>
+								<li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+								<li><%= link_to 'Log out', logout_path %></li>
+							</ul>
+						</div>												
 					<% else %>				
-						<% if request.path != new_user_registration_path && request.path != user_registration_path && request.path != register_path %>
-						<div class="btn-group">							
-			            	<%= link_to 'Register', register_path, {:class => 'btn btn-primary'} %>
-              			</div>
-              			<% end %>
-	              		<% if request.path != new_user_session_path && request.path != login_path %>
-	              			<div class="btn-group">							
-				            	<%= link_to 'Log in', login_path, {:class => 'btn btn-primary'} %>
-	              			</div>
-            			<% end %>
+						<% if show_registration %>
+							<div class="btn-group">							
+		          	<%= link_to 'Register', register_path, {:class => 'btn btn-primary'} %>
+	      			</div>
+	    			<% end %>
+	      		<% if show_login %>
+		        			<div class="btn-group">							
+		            	<%= link_to 'Log in', login_path, {:class => 'btn btn-primary'} %>
+		        			</div>
+	    			<% end %>
 					<% end %>
 				</ul>
 			</div>
 		</div> 	
 	</div>
-	<div class="container" >
-		<% flash.each do |type, message| %>
-			<div class="alert <%= flash_class type %>">				
-				<%= message %>
-				<button class="close" data-dismiss="alert">x</button>
-			</div>
-		<% end %>
-
-		<%= yield %>
+	<div class="container">
+			<% flash.each do |type, message| %>
+				<div class="alert <%= flash_class type %>">				
+					<%= message %>
+					<button class="close" data-dismiss="alert">x</button>
+				</div>
+			<% end %>
+			<%= yield %>
 	</div>
 </body>
 </html>

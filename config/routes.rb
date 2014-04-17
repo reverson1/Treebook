@@ -1,5 +1,4 @@
 Treebook::Application.routes.draw do
-  get "profiles/show"
   devise_for :users
   
   devise_scope :user do
@@ -10,9 +9,10 @@ Treebook::Application.routes.draw do
 
   resources :leafs
   get 'feed', to: 'leafs#index', as: :feed
+  get '/:id', to:'leafs#index', as: :vanity
   root :to => 'leafs#index'
 
-  get '/:id', to:'leafs#index'
+ 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

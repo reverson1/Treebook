@@ -1,24 +1,31 @@
 <div class="row">
-    <div class="leaf-index span12">
-    <h2>Edit Leaf</h2>
-	<%= simple_form_for(@leaf, html: {class: "form-horizontal"}) do |f| %>
-		<% if @leaf.errors.any? %>
-			<div id="error_explanation">
-			  <h2><%= pluralize(@leaf.errors.count, "error") %> prohibited this leave from being saved:</h2>
-			  <ul>
-			  <% @leaf.errors.full_messages.each do |msg| %>
-			    <li><%= msg %></li>
-			  <% end %>
-			  </ul>
+	<div class="span12">
+		<div class="leaf-index">
+			<%= simple_form_for(@leaf, html: {class: "vertical-horizontal"}) do |f| %>
+			<fieldset class="well">
+				<legend class="treebook-header">Edit Leaf</legend>					
+				<% if @leaf.errors.any? %>
+					<div id="error_explanation">
+						<h2><%= pluralize(@leaf.errors.count, "error") %> prohibited this leave from being saved:</h2>
+						<ul>
+							<% @leaf.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>	
+				<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 98%'} %>	
+			
+			<div align="center">
+				<div class="btn-group" > 		
+					<%= f.submit 'Update Leaf', :class => 'btn btn-primary' %>
+				</div>
+				<div class="btn-group" > 	
+					<%= link_to "Cancel", feed_path, :class => 'btn btn-primary' %>					
+				</div>
 			</div>
-		<% end %>
-		<fieldset>
-		  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'} %>
 		</fieldset>
-		<div align="center" class="form-actions-center">	    	
-	    	<%= f.submit 'Update Leaf', :class => 'btn btn-primary' %>
-	    	<%= link_to "Cancel", :back, :class => 'btn btn-primary'  %>
-	  	</div>
-	<% end %>	
-  </div>
+			<% end %>	
+		</div>
+	</div>
 </div>

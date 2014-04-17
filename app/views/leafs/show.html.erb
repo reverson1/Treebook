@@ -2,7 +2,7 @@
 	<div class="span12">
 		<div class="leaf-index">
 			<fieldset class="well">
-		        <legend class="treebook-header">View Leave</legend>			
+		        <legend class="treebook-header">View Leaf</legend>			
 				<strong>Name:</strong>
 				<strong>
 				  <% if !@leaf || !@leaf.user %>
@@ -13,8 +13,8 @@
 				</strong>
 
 				<p>
-			  		<strong>Content:</strong>
-			  		<%= @leaf.content %>
+		  		<strong>Content:</strong>
+		  		<%= @leaf.content %>
 				</p>			
 			</fieldset>
 			<div align="center">
@@ -24,7 +24,7 @@
 					</div>
 				<% end %>
 				<div class="btn-group" > 	
-					<%= link_to 'Done', leafs_path, :class => 'btn btn-primary'  %>
+    			<%= link_to "Done", feed_path, :class => 'btn btn-primary' %>					
 				</div>
 			</div>
 		</div>

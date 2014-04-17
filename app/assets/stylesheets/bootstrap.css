@@ -227,7 +227,6 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #ffffff;
 }
 
 a {
@@ -3896,13 +3895,14 @@ input[type="submit"].btn.btn-mini {
 
 .alert {
   padding: 8px 35px 8px 14px;
-  margin-top: 15px; 
-  margin-bottom: 10px;
-  width: 50%;
+  margin-top: -5px; 
+  margin-bottom: 5px;
+  width: 620px;
   position: absolute;
+  margin-left: 135px;
   z-index: 1;
-  margin-left:10%;
-  margin-right:10%;
+
+
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   background-color: #fcf8e3;
   border: 1px solid #fbeed5;
@@ -4392,8 +4392,6 @@ input[type="submit"].btn.btn-mini {
 .navbar {
   *position: relative;
   *z-index: 2;
-  margin-bottom: 20px;
-  overflow: visible;
 }
 
 .navbar-inner {
@@ -4430,8 +4428,8 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar .container {
-  width: auto;
-}
+  
+}width: auto;
 
 .nav-collapse.collapse {
   height: auto;
