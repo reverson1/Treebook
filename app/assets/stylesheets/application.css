@@ -12,8 +12,6 @@
  *= require_tree .
  */
 
-body{padding-top: 55px; color: #533a26; background: url('background.jpg') fixed;}
-
-
+body{ height: 100%;padding-top: 55px; color: #D1E0FF; background: url('background.jpg') fixed;}
 
 .row {padding-top: 40px;}

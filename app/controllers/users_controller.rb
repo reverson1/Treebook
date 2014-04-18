@@ -9,6 +9,7 @@ class UsersController < ActionController::Base
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     @user.remember_me = params[:user][:remember_me]
+    @user.created_at = now()
   end
 
   private
@@ -20,5 +21,6 @@ class UsersController < ActionController::Base
     params.require(:user).permit(:password)
     params.require(:user).permit(:password_confirmation)
     params.require(:user).permit(:remember_me)
+    params.require(:user).permit(:created_at)
   end  
 end

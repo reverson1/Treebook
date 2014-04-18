@@ -27,7 +27,9 @@ class User < ActiveRecord::Base
   def fullname
     first_name + ' ' + last_name
   end
+  
 
+  
   def gravatar_url
     email_strip = email.strip
     downcase_email = email_strip.downcase    
@@ -35,4 +37,5 @@ class User < ActiveRecord::Base
     
     "http://gravatar.com/avatar/#{hash}"
   end
+
 end

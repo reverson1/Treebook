@@ -8,21 +8,28 @@
 </head>
 <body>
 	<%
-		# get the user and set the leafs
-	  if params && params[:id] 
-	    @user = User.find_by_profile_name(params[:id])
-	    if @user
-	      @leafs = @user.leafs.all(:order => 'created_at DESC')
-	    end
+		# get the user's leafs
+	  if current_user
+	  	@leafs = current_user.leafs.all(:order => 'created_at DESC')
 	  end
 
-	  # this is necessary because vanity_path is undefined if a profile_name isn't provided
+	  # this is necessary because vanity_path is undefined by route.rb if a profile_name isn't provided
 	  begin
-	  	vanity = vanity_path
+	  	if(current_user)
+	  		vanity = '/' + current_user.profile_name
+	  	else
+	  		vanity = feed_path
+	  	end
 	  rescue
-	  	vanity = ""
+	  	vanity = feed_path
 	  end
 		
+		begin
+			edit_path = edit_leaf_path(@leaf)
+		rescue
+			edit_path = ""
+		end
+
 		# check the path - show login or registration buttons?
 	  case request.path
 	  when new_user_registration_path, user_registration_path, register_path 
@@ -33,36 +40,37 @@
 	  	show_login = false
 	  	show_registration = true
 	  	show_create_a_leaf = false
-	  when new_leaf_path, root_path, vanity, feed_path
+	  when new_leaf_path, root_path, vanity, feed_path, edit_path
 	  	show_registration = !@leafs || @leafs.count == 0
 	  	show_login = false
-	  	show_create_a_leaf = user_signed_in?
+	  	show_create_a_leaf = user_signed_in? && new_leaf_path != request.path
 	  else
 	  	show_registration = false
 	  	show_login = false
 	  	show_create_a_leaf = false
 	  end
 	%>
+
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">		
 			<div class="container">
 
 				<% if user_signed_in? %>
-					<a href="<%= '../' + current_user.profile_name %>" class="brand"> Treebook</a>
-					<%= link_to 'All Leafs', feed_path , :class => 'btn btn-primary'  %>
+					<a href="<%= vanity %>" class="brand"> Treebook</a>
+					<%= link_to 'All Leaves', feed_path , :class => 'btn btn-primary'  %>
 				<% else %>
 					<a href="<%= register_path %>" class="brand"> Treebook</a>
 				<% end %>
 
 				<ul class="nav pull-right">
 					<% if show_create_a_leaf %>
-						<%= link_to "Create a New Leaf", new_leaf_path, class: "btn btn-success" %>		
+						<%= link_to "Plant a New Leaf", new_leaf_path, class: "btn btn-success" %>		
 					<% end %>
 					<% if user_signed_in? %>       
 						<div class="btn-group">		          			
 							<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.fullname %> <span class="caret"></span></button>
 							<ul class="dropdown-menu">
-								<li><%= link_to 'My Leafs', '../' + current_user.profile_name %></li>
+								<li><%= link_to 'My Leaves', vanity %></li>
 								<li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
 								<li><%= link_to 'Log out', logout_path %></li>
 							</ul>

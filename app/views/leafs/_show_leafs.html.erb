@@ -1,32 +1,81 @@
-				<% @leafs.each do |leaf| %>
-					<div class="well">           
-              			<div class="leaf row">
-			                <div class="span2">
-			                    <% if !leaf || !leaf.user %>
-			                      <img src="http://gravatar.com/avatar"/>
-			                    <% else %>
-			                      <img src="<%=leaf.user.gravatar_url %>"/>
-			                    <% end %>            
-			                </div>
-			                <div class="span8">              
-			                  <strong>
-			                    <% if !leaf || !leaf.user %>
-			                      Unknown
-			                    <% else %>
-			                      <%= leaf.user.fullname %>
-			                    <% end %>
-			                  </strong>
-			                  <p><%= leaf.content %></p>
-			                  
-			                  <div class="meta">
-			                    <%= link_to time_ago_in_words(leaf.created_at) + " ago", leaf ,:class => 'btn btn-primary btn-mini' %>
-			                    <% if user_signed_in? && leaf.user_id == current_user.id %>
-			                      <span class="admin">
-			                        <%= link_to "Rake", leaf, method: :delete, data: { confirm: "Are you sure you want to delete this entry?"},:class => 'btn btn-primary btn-mini' %>
-			                      </span>
-			                    <% end %>
-			                  </div>
-			                </div>
-            			</div>
-          			</div>
-				<% end %>			
+<% @leafs.each do |leaf| %>
+	<div class="leaf well-small">           
+		<div class="leaf row" style="padding:0px;margin:0px;height:100%; background-color:#FFFFFF;">
+      <table height="100%">
+        <thead>
+          <tr>
+            <th align="center" class="leaf header">
+              Planter
+            </th>
+            <th align="center"  class="leaf header">
+              <table width="100%" style="height:20px; padding-left:10px; padding-right:10px;">
+                <tr>
+                  <td align="right">
+                    <% if leaf.user_id == current_user.id %>
+                      <span class="admin">
+                        <%= link_to "Rake", leaf, method: :delete, data: { confirm: "Are you sure you want to delete this entry?"},:class => 'btn btn-primary btn-small' %>
+                      </span>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+            </th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td class="leaf span3"></td>
+            <td class="meta" style="height:20px; padding-left:10px; padding-right:10px; padding-bottom:5px; vertical-align:bottom;">  
+              <table width="100%">
+                <tr>
+                  <td align="center">
+                    <%= link_to 'Water this Leaf', leaf ,:class => 'btn btn-primary' %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </tfoot>
+        <tbody> 
+          <tr>
+            <td class="leaf span3" align="center" style="vertical-align:top;">
+              <br/>
+              <% if !leaf || !leaf.user %>
+                <img src="http://gravatar.com/avatar"/>
+              <% else %>
+                <img src="<%=leaf.user.gravatar_url %>"/>
+              <% end %>   
+              <br/><br/>
+              <strong>
+                <% if !leaf || !leaf.user %>
+                  Unknown
+                <% else %>
+                  <%= leaf.user.fullname %>
+                <% end %>
+              </strong>
+              <br/></br/>
+                            <strong>Last Watered:</strong>
+              <br/><%= time_ago_in_words(leaf.updated_at) + " ago" %>
+              <br/><br/>
+              <strong>Planted:</strong>
+              <br/>
+              <%= time_ago_in_words(leaf.created_at) + " ago" %>
+              <br/><br/>
+
+              <strong>Total Leaves:</strong> <%= @leafs.count %>                         
+              <br/></br/>
+              <strong>Joined:</strong>
+              <br/><%= leaf.user.created_at.strftime("%ar, %b %-d, %Y") %>
+              <br/>
+            </td>
+            <td class="span10" align="left" style="height:100%; padding-left:10px;">  
+              <div style="height:100%; width:100%; padding-top:10px;">
+                <%= leaf.content %>
+              </div>                                      
+            </td>
+          </tr>  
+        </tbody>  
+      </table>
+		</div>
+	</div>
+<% end %>			

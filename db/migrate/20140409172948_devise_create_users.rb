@@ -23,6 +23,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
 
+      t.datetime :created_at
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at
@@ -39,7 +40,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
 
       # Uncomment below if timestamps were not included in your original model.
-      # t.timestamps
+       t.timestamps
     end
 
     add_index :users, :email,                :unique => true

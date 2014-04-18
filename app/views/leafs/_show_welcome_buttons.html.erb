@@ -1,7 +1,7 @@
 <div class="dialog">
-<div class="span2"><br/></div>
-<div class="span8">
-        <div class="leaf-index">
+  <div class="span2"><br/></div>
+    <div class="span8">
+      <div class="leaf-index">
         <br/>
         <div align="center">
           <br/>
@@ -14,27 +14,33 @@
             <br />
           <table width="80%">
             <tr>
-              <td align="center"><table><tr>
-              <% if @leafs && @leafs.count > 0 && user_signed_in? %>
-                <td align="right">
-                  <%= link_to 'View Other Leafs', feed_path, {:class => 'btn btn-primary btn-large'} %>
-                </td>
-                <td/> 
-                <td align="left"/>
-              <% else %>
-                <td align="center"/>
-              <% end %>
-                <% if user_signed_in? %>
-                    <%= link_to "Create a Leaf", new_leaf_path, class: "btn btn-success btn-large" %>
-                <% else %>
-                  <%= link_to 'Register', register_path, {:class => 'btn btn-primary btn-large'} %>
-                  <%= link_to 'Log in', login_path, {:class => 'btn btn-primary btn-large'} %>
-                <% end %>
+              <td align="center">
+                <table>
+                  <tr>
+                    <% if @leafs && @leafs.count > 0 && user_signed_in? %>
+                    <td align="right">
+                      <%= link_to 'View Other Leafs', feed_path, {:class => 'btn btn-primary btn-large'} %>
+                    </td>
+                    <td/> 
+                    <td align="left"/>
+                    <% else %>
+                    <td align="center"/>
+                    <% end %>
+                      <% if user_signed_in? %>
+                          <%= link_to "Create a Leaf", new_leaf_path, class: "btn btn-success btn-large" %>
+                      <% else %>
+                        <%= link_to 'Register', register_path, {:class => 'btn btn-primary btn-large'} %>
+                        <%= link_to 'Log in', login_path, {:class => 'btn btn-primary btn-large'} %>
+                      <% end %>
+                    </td>
+                  </tr>
+                </table>
               </td>
-            </tr></table></td>
             </tr>
           </table>
-          <br/>
-          <br/>
-        </div>
-      </div></div></div>
+        <br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+</div>

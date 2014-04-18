@@ -32,6 +32,13 @@ class LeafsController < ApplicationController
   # GET /leafs/1/edit
   def edit
   end
+  
+  # POST /leafs
+  # POST /leafs.json
+  def reply
+    @original_leaf = Leaf.find(params[:id])
+    @leaf = Leaf.new
+  end
 
   # POST /leafs
   # POST /leafs.json
@@ -40,7 +47,7 @@ class LeafsController < ApplicationController
 
     respond_to do |format|
       if @leaf.save
-        format.html { redirect_to @leaf, notice: 'leaf was successfully created.' }
+        format.html { redirect_to @leaf, notice: 'Leaf was successfully created.' }
         format.json { render action: 'show', leaf: :created, location: @leaf }
       else
         format.html { render action: 'new' }
@@ -54,7 +61,7 @@ class LeafsController < ApplicationController
   def update
     respond_to do |format|
       if @leaf.update(leaf_params)
-        format.html { redirect_to @leaf, notice: 'leaf was successfully updated.' }
+        format.html { redirect_to @leaf, notice: 'Leaf was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -83,8 +90,8 @@ class LeafsController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never  trust parameters from the scary internet, only allow the white list through.
     def leaf_params
-      params.require(:leaf).permit(:name, :content, :user_id)
+      params.require(:leaf).permit( :content, :user_id)
     end
 end

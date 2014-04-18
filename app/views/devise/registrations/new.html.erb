@@ -10,14 +10,14 @@
 
             <%= f.input :first_name, :autofocus => true %>
             <%= f.input :last_name %>
-            <%= f.input :profile_name %>
+            <%= f.input :profile_name, :label => "Vanity ID" %>
             <%= f.input :email %>
-            <%= f.input :password %>
+            <%= f.input :password, :hint =>"Minimum of 8 characters" %>
             <%= f.input :password_confirmation %>
           </fieldset>
           <div align="center">
             <%= f.button :submit, :class => 'btn btn-primary' %>
-            <%= link_to "Cancel", "..", :class => 'btn btn-primary'  %>
+            <%= link_to "Cancel", root_path, :class => 'btn btn-primary'  %>
           </div>
       <% end %>
     </div>

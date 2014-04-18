@@ -1,40 +1,61 @@
-<div class="dialog">
-<div class="span1"><br/></div>
-<div class="leaf-index span10">
-  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {class:"form-horizontal", :method => :put}) do |f| %>
-    <%= devise_error_messages! %>
-    <fieldset class="well">
-      <legend class="treebook-header">Edit <%= resource_name.to_s.humanize %></legend>
+<div style="padding-top: 40px;">
+  <div class ="span1"><br/></div>
+  <div class="span10">
+    <div class="leaf-index" style="padding:0;">
+      <table width="100%" style="height:100%; background-color:#FFFFFF;">
+        <thead>
+          <tr>
+            <th colspan = "2" align="center"  class="leaf header">
+              Edit Profile
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="span3 well" align="center" style="vertical-align:top;height:100%;">   
+              <br/>
+              <% if !current_user %>
+                <img src="http://gravatar.com/avatar"/>
+              <% else %>
+                <img src="<%=current_user.gravatar_url %>"/>
+              <% end %>   
+              <br/><br/>
+              <strong>
+                <% if !current_user %>
+                Unknown
+                <% else %>
+                <%= current_user.fullname %>
+                <% end %>
+              </strong>
+              <br/></br/>
+              <strong>Leaves:</strong> <%= current_user.leafs.count %>                         
+              <br/></br/>
+              <strong>Joined:</strong><br><%= current_user.created_at.strftime("%ar, %b %-d, %Y") %>
+              <br/><br/>
+              <%= link_to 'Close Account', registration_path(resource_name), :data =>  {:confirm => "Are you sure?"} , :method => :delete, :class => 'btn btn-primary' %>                              
+            </td>
 
-      <div class="span6">
-       
-            <%= f.input :email, :autofocus => true %>
+            <td class="span7" align="center" style="vertical-align:top;margin-top:20px;">
+              <br/>
+              <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {class:"form-horizontal", :method => :put}) do |f| %>
+              <%= f.input :email, :autofocus => true %>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>                  
 
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-            <% end %>                  
+              <%= f.input :password, :label => "New Password", :autocomplete => "off", :hint => "Leave blank to not change it" %>
+              <%= f.input :password_confirmation %>
+              <%= f.input :current_password, :hint => "Your password confirms your changes" %>
 
-            <%= f.input :password, :label => "New Password", :autocomplete => "off", :hint => "Leave blank to not change it" %>
-            <%= f.input :password_confirmation %>
-            <%= f.input :current_password, :hint => "Your password confirms your changes" %>
-          
-        <div align='center'>
-          <%= f.button :submit, "Update", :class => 'btn btn-primary' %>
-        </div>
-      </div>
-      <div class="span1"><br/></div>
-      <div class="span3" align="center">
-        <div class="well">
-          <div>
-          <img src="<%= @user.gravatar_url %>"/>
-          </div>
-          <br/>
-          <h4>Close my account</h4>            
-          <%= link_to 'Close', registration_path(resource_name), :data =>  {:confirm => "Are you sure?"} , :method => :delete, :class => 'btn btn-primary' %>
-        </div>
-      </div>
-    </fieldset>
-  <% end %>
-</div>
-      <div class="span1"><br/></div>
+              <%= f.button :submit, "Update", :class => 'btn btn-primary' %>
+              <%= link_to "Cancel", feed_path, :class => 'btn btn-primary' %> 
+              <% end %>
+
+            </td>
+          </tr>  
+        </tbody>
+      </table>
     </div>
+  </div>
+  <div class ="span1"><br/></div>
+</div>
