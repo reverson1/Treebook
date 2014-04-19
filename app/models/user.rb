@@ -31,11 +31,15 @@ class User < ActiveRecord::Base
 
   
   def gravatar_url
-    email_strip = email.strip
-    downcase_email = email_strip.downcase    
-    hash = Digest::MD5.hexdigest(downcase_email)
-    
-    "http://gravatar.com/avatar/#{hash}"
+    begin
+      email_strip = email.strip
+      downcase_email = email_strip.downcase    
+      hash = Digest::MD5.hexdigest(downcase_email)
+      
+      "http://gravatar.com/avatar/#{hash}"
+    rescue
+      "http://gravatar.com/avatar/"
+    end
   end
 
 end

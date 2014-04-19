@@ -8,6 +8,7 @@
 </head>
 <body>
 	<%
+	
 		# get the user's leafs
 	  if current_user
 	  	@leafs = current_user.leafs.all(:order => 'created_at DESC')
@@ -72,7 +73,7 @@
 							<ul class="dropdown-menu">
 								<li><%= link_to 'My Leaves', vanity %></li>
 								<li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
-								<li><%= link_to 'Log out', logout_path %></li>
+								<li><%= link_to 'Sign out', logout_path %></li>
 							</ul>
 						</div>												
 					<% else %>				
@@ -83,7 +84,7 @@
 	    			<% end %>
 	      		<% if show_login %>
 		        			<div class="btn-group">							
-		            	<%= link_to 'Log in', login_path, {:class => 'btn btn-primary'} %>
+		            	<%= link_to 'Sign in', login_path, {:class => 'btn btn-primary'} %>
 		        			</div>
 	    			<% end %>
 					<% end %>

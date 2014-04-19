@@ -1,26 +1,44 @@
-<div class="dialog">
-  <div class="span2"><br/></div>
-  <div class="span8">
-    <div class="leaf-index">
-      <%= devise_error_messages! %>
-      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
-        
-          <fieldset class="well">
-            <legend class="treebook-header">Sign up</legend>
+<div style="padding-top: 40px;">
+  <div class ="span1"><br/></div>
+  <div class="span10">
+    <div class="leaf-index" style="padding:0;">
+      <table width="100%" style="height:100%; background-color:#FFFFFF;">
+        <thead>
+          <tr>
+            <th colspan = "2" align="center"  class="leaf header">
+              New Profile
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="span3 well" align="center" style="vertical-align:center;height:100%;">   
+              <%= image_tag 'tree.png' %> 
+              <br/> 
+              <h2>Welcome to Treebook!</h2>                          
+            </td>
 
-            <%= f.input :first_name, :autofocus => true %>
-            <%= f.input :last_name %>
-            <%= f.input :profile_name, :label => "Vanity ID" %>
-            <%= f.input :email %>
-            <%= f.input :password, :hint =>"Minimum of 8 characters" %>
-            <%= f.input :password_confirmation %>
-          </fieldset>
-          <div align="center">
-            <%= f.button :submit, :class => 'btn btn-primary' %>
-            <%= link_to "Cancel", root_path, :class => 'btn btn-primary'  %>
-          </div>
-      <% end %>
+            <td class="span7" style="vertical-align:top;margin-top:20px;">
+              <br/>
+              <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
+        
+              <%= devise_error_messages! %>
+                <%= f.input :first_name, :autofocus => true %>
+                <%= f.input :last_name %>
+                <%= f.input :profile_name, :label => "Vanity ID" %>
+                <%= f.input :email %>
+                <%= f.input :password, :hint =>"Minimum of 8 characters" %>
+                <%= f.input :password_confirmation %>
+
+              <div align="center">
+                <%= f.button :submit, :class => 'btn btn-primary' %>
+                <%= link_to "Cancel", root_path, :class => 'btn btn-primary'  %>
+              </div><% end %> 
+            </td>
+          </tr> 
+        </tbody>
+      </table>
     </div>
   </div>
-  <div class="span2"><br/></div>
+  <div class ="span1"><br/></div>
 </div>

@@ -1,46 +1,67 @@
-<div class="dialog">
-  <div class="span2"><br/></div>
-    <div class="span8">
-      <div class="leaf-index">
-        <br/>
-        <div align="center">
-          <br/>
-          <h1>Welcome to Treebook!</h1>
-          <br/>
-          <% if user_signed_in? %>
-              <h2><%= current_user.fullname %></h2>
-              <br/>             
-            <% end %>
-            <br />
-          <table width="80%">
-            <tr>
-              <td align="center">
-                <table>
-                  <tr>
-                    <% if @leafs && @leafs.count > 0 && user_signed_in? %>
-                    <td align="right">
-                      <%= link_to 'View Other Leafs', feed_path, {:class => 'btn btn-primary btn-large'} %>
-                    </td>
-                    <td/> 
-                    <td align="left"/>
-                    <% else %>
-                    <td align="center"/>
-                    <% end %>
-                      <% if user_signed_in? %>
-                          <%= link_to "Create a Leaf", new_leaf_path, class: "btn btn-success btn-large" %>
-                      <% else %>
-                        <%= link_to 'Register', register_path, {:class => 'btn btn-primary btn-large'} %>
-                        <%= link_to 'Log in', login_path, {:class => 'btn btn-primary btn-large'} %>
-                      <% end %>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        <br/>
-        <br/>
-      </div>
+<div>
+  <div class ="span1"><br/></div>
+  <div class="span10">
+    <div class="leaf-index" style="padding:0;">
+      <table width="100%" style="height:100%; background-color:#FFFFFF;">
+        <thead>
+          <tr>
+            <th colspan = "2" align="center"  class="leaf header">
+              <strong>
+                <% if user_signed_in? %>
+                  Welcome to Treebook, <%= current_user.fullname %>!
+                <% else %>
+                  Welcome!        
+                <% end %>  
+              </strong>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="span3 well" align="center" style="vertical-align:center;height:100%;">   
+              <%= image_tag 'tree.png' %> 
+              <br/> 
+              <h2>Welcome to Treebook!</h2>    
+              <br/>                    
+            </td>
+
+            <td class="span7" style="vertical-align:middle;margin-top:20px;">
+              <table width="100%">
+                <tr>
+                  <td align="center">
+                    <h2>Planting Leaves Everyday</h2>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center">
+                    <table>
+                      <tr>
+                        <% if @leafs && @leafs.count > 0 && user_signed_in? %>
+                        <td align="right">
+                          <%= link_to 'View Other Leafs', feed_path, {:class => 'btn btn-primary btn-large'} %>
+                        </td>
+                        <td/> 
+                        <td align="left"/>
+                        <% else %>
+                        <td align="center"/>
+                        <% end %>
+                          <% if user_signed_in? %>
+                              <%= link_to "Create a Leaf", new_leaf_path, class: "btn btn-success btn-large" %>
+                          <% else %>
+                            <%= link_to 'Register', register_path, {:class => 'btn btn-primary btn-large'} %>
+                            <%= link_to 'Sign in', login_path, {:class => 'btn btn-primary btn-large'} %>
+                          <% end %>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr> 
+        </tbody>
+      </table>
     </div>
   </div>
+  <div class ="span1"><br/></div>
 </div>
