@@ -10,8 +10,9 @@
 	        </tr>
 	      </thead>
 	      <tbody>
-	      	<tr>	      		
-	      		<td align="center" height="100%" style="padding-top:15px">
+	      		<tr>	      		
+	      		<td width="100%" height="100%" style="padding-top:20px;">
+	      			<div align="center">
 							<%= simple_form_for(@leaf, html: {class: "form-vertical"}) do |f| %>
 								<% if @leaf.errors.any? %>
 									<div id="error_explanation">
@@ -20,23 +21,21 @@
 									  <% @leaf.errors.full_messages.each do |msg| %>
 									    <li><%= msg %></li>
 									  <% end %>
-									  </ul>
+									  </ul>	
 									</div>
 								<% end %>
 
-						  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'}, :autofocus => true, label: false %>
-	              <% if user_signed_in?%>	              
-	                <% if @leaf.user_id == current_user.id %>
-										<%= f.submit 'Update Leaf', :class => 'btn btn-primary' %>
-	                <% end %>
-	              <% end %>
-					    	
-								<%= link_to "Cancel", @leaf, :class => 'btn btn-primary' %>		
+						  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'}, :autofocus => true, label: false, placeholder:'Remember, stay leafy!' %>
+
+					    	<%= f.submit 'Replant Leaf', :class => 'btn btn-primary' %>
+								<%= link_to "Cancel", :back, :class => 'btn btn-primary' %>		
 							<% end %>	
+							</div>
+							
 						</td>
 					</tr>
 				</tbody>
 			</table>
     </div>
   </div>
-</div>   
+</div>    

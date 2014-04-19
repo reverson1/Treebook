@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="span12">
+    <div class="leaf-index" style="padding:0;">
+		  <table width="100%" style="height:100%; background-color:#FFFFFF;">
+	      <thead>
+            <th class="leaf header"  style="height:20px;">
+							<div style="margin-left:auto; margin-right:auto;  z-index:0">View Leaf <%= @leafs.count %></div>
+							<% if @leaf.user_id == current_user.id %>
+                <div class="admin span12" style="left:910px; top:100px; position:absolute; z-index:1">
+                  <%= link_to "Rake", @leaf, method: :delete, data: { confirm: "Are you sure you want to delete this entry?"},:class => 'btn btn-primary btn-mini' %>
+                </div>
+		          <% end %>
+            </th>
+	      </thead>
+	      <tbody>
+	      	<tr>	      		
+	      		<td height="100%" style="padding-top:15px;padding-bottom:10px;">
+							<div  align="center" >
+								<textarea  class="uneditable-textarea" rows="15" readonly style="height: 100%; width: 90%" resize="none" ><%= @leaf.content %></textarea>
+							</div>
+							<br/>
+							<div align="center">
+								<% if user_signed_in? %>
+                  <%= link_to "Reply to Leaf", reply_path(@leaf), class: "btn btn-success" %>  
+
+									<% if @leaf && current_user && @leaf.user_id == current_user.id %>
+										<%= link_to 'Edit Leaf', edit_leaf_path(@leaf), :class => 'btn btn-primary'  %>
+									<% end %>
+								<% end %>
+								<%= link_to "Done", feed_path, :class => 'btn btn-primary' %>		
+							</div><br/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+    </div>
+  </div>
+</div>  

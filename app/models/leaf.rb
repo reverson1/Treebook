@@ -6,4 +6,6 @@ class Leaf < ActiveRecord::Base
 						length: {minimum: 2}
 
 	validates :user_id, presence: true
+
+	has_one :users, :dependent => :destroy
 end

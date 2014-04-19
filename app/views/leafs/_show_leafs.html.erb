@@ -26,13 +26,15 @@
           <tr>
             <td class="leaf span3"></td>
             <td class="meta" style="height:20px; padding-left:10px; padding-right:10px; padding-bottom:5px; vertical-align:bottom;">  
-              <table width="100%">
-                <tr>
-                  <td align="center">
-                    <%= link_to 'Water this Leaf', leaf ,:class => 'btn btn-primary' %>
-                  </td>
-                </tr>
-              </table>
+              <% if !@leaf %>
+                <table width="100%">
+                  <tr>                    
+                    <td align="center">
+                      <%= link_to 'Water this Leaf', leaf ,:class => 'btn btn-primary' %>
+                    </td>
+                  </tr>
+                </table>
+              <% end %>
             </td>
           </tr>
         </tfoot>
@@ -54,24 +56,46 @@
                 <% end %>
               </strong>
               <br/></br/>
-                            <strong>Last Watered:</strong>
-              <br/><%= time_ago_in_words(leaf.updated_at) + " ago" %>
-              <br/><br/>
+              <% if leaf == @leafs.first %>
+                <strong>Last Watered:</strong>
+                <br/><%= leaf.updated_at %>
+                <br/><br/>
+              <% end %>
               <strong>Planted:</strong>
               <br/>
-              <%= time_ago_in_words(leaf.created_at) + " ago" %>
+              <%= leaf.created_at  %>
               <br/><br/>
 
-              <strong>Total Leaves:</strong> <%= @leafs.count %>                         
+              <strong>Total Leaves:</strong> <%= current_user.leafs.count %>                         
               <br/></br/>
               <strong>Joined:</strong>
               <br/><%= leaf.user.created_at.strftime("%ar, %b %-d, %Y") %>
               <br/>
             </td>
-            <td class="span10" align="left" style="height:100%; padding-left:10px;">  
-              <div style="height:100%; width:100%; padding-top:10px;">
-                <%= leaf.content %>
-              </div>                                      
+            <td height="100%" class="span10" style="padding-top:15px;padding-bottom:10px;">
+
+
+              <% if @leaf %>
+                <div style="height:100%; width:100%; padding-top:40px; padding-left:10px; padding-right:10px;">
+                  <%= leaf.content %>
+                </div>  
+                <br/>              
+                <div align="center">                  
+                  <% if user_signed_in? %>
+                    <% if leaf && leaf.original_id == 0 %>
+                      <%= link_to "Reply to Leaf", reply_leaf_path, class: "btn btn-success" %>
+                    <% end %>
+                    <% if current_user && leaf.user_id == current_user.id %>
+                      <%= link_to 'Edit Leaf', edit_leaf_path(leaf), :class => 'btn btn-primary'  %>
+                    <% end %>
+                  <% end %>                   
+                </div><br/>
+              <% else %>
+                <div style="height:100%; width:100%; padding-top:10px; padding-left:10px; padding-right:10px;">
+                  <%= leaf.content %>
+                </div>    
+                <br/>           
+              <% end %>
             </td>
           </tr>  
         </tbody>  

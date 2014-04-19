@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409182549) do
+ActiveRecord::Schema.define(version: 20140418184809) do
 
   create_table "leafs", force: true do |t|
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "original_id"
   end
 
+  add_index "leafs", ["original_id"], name: "index_leafs_on_original_id"
   add_index "leafs", ["user_id"], name: "index_leafs_on_user_id"
 
   create_table "users", force: true do |t|

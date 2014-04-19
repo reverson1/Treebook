@@ -10,7 +10,8 @@ Treebook::Application.routes.draw do
   resources :leafs
   get 'feed', to: 'leafs#index', as: :feed
   get '/:profile_name', to:'leafs#index', as: :vanity
-  get 'leafs/:id/reply', to: 'leafs#reply', as: :reply
+  get 'leafs/:id/reply', to: 'leafs#reply', as: :reply_leaf
+  post 'leafs/:id/reply', to: 'leafs#post_reply', as: :post_reply
   root :to => 'leafs#index'
 
  

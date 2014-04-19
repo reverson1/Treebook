@@ -23,8 +23,7 @@
 									  </ul>	
 									</div>
 								<% end %>
-
-						  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'}, :autofocus => true, label: false %>
+						  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'}, :autofocus => true, label: false, placeholder:'Remember, stay leafy!' %>
 
 					    	<%= f.submit 'Plant New Leaf', :class => 'btn btn-primary' %>
 								<%= link_to "Cancel", feed_path, :class => 'btn btn-primary' %>		

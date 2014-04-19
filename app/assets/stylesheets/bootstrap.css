@@ -1112,6 +1112,7 @@ textarea,
 
 textarea {
   height: auto;
+
 }
 
 textarea,
@@ -1216,8 +1217,18 @@ input[type="checkbox"]:focus {
   outline-offset: -2px;
 }
 
-.uneditable-input,
 .uneditable-textarea {
+  color: #999999;
+  cursor: text;
+  background-color: #fcfcfc;
+  border-color: #cccccc;
+  resize: none;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+     -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+}
+.uneditable-input,
+{
   color: #999999;
   cursor: not-allowed;
   background-color: #fcfcfc;
