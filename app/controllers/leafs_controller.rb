@@ -5,8 +5,23 @@ class LeafsController < ApplicationController
   # GET /leafs
   # GET /leafs.json
   def index
+    # this is necessary because vanity_path is undefined by route.rb if a profile_name isn't provided
+    begin
+      if(current_user)
+        vanity = '/' + current_user.profile_name
+      else
+        vanity = feed_path
+      end
+    rescue
+      vanity = feed_path
+    end
+
     #get only original leaves - no replies
-    @leafs = Leaf.where("original_id = '' or original_id is null").order("id DESC")
+    if(request.path == vanity)
+      @leafs = Leaf.where("original_id = '#{current_user.id}' or user_id = '#{current_user.id}'").order("updated_at DESC")
+    else
+      @leafs = Leaf.where("original_id = '' or original_id is null").order("id DESC")
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -87,11 +102,17 @@ class LeafsController < ApplicationController
   # POST /leafs.json
   def create
     @leaf = Leaf.new(leaf_params)
-    @leaf.content = params[:leaf][:content]
-    @leaf.user_id = params[:leaf][:user_id]
-    @leaf.original_id  = params[:leaf][:original_id]
-    @leaf.created_at = params[:leaf][:created_at]
-    @leaf.updated_at = params[:leaf][:updated_at]
+    @leaf.user_id = current_user[:id]
+
+    respond_to do |format|
+      if @leaf.save
+        format.html { redirect_to @leaf, notice: 'Leaf was successfully planted.' }
+        format.json { render action: 'show', leaf: :created, location: @leaf }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @leaf.errors, leaf: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /leafs/1
@@ -139,7 +160,7 @@ class LeafsController < ApplicationController
 
       #render the redirected page
       respond_to do |format|
-        format.html { redirect_to redirect_url, notice: !reply_count ? 'Leaf was successfully deleted.' : 'Reply leaf was successfully deleted.' }
+        format.html { redirect_to redirect_url, notice: !reply_count ? 'Leaf was successfully raked.' : 'Reply leaf was successfully raked.' }
         format.json { head :no_content }
       end
     end

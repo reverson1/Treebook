@@ -3,7 +3,7 @@
     <% if current_user && @leafs && @leafs.count > 0 %>
       <div class="leaf-index">
         <% if params && (params[:profile_name] || params[:id]) && user_signed_in? %>
-          <h2><%= current_user.first_name %>'s Leaves</h2>
+          <h2><%= current_user.first_name + "'s " + ((@leafs.count == 1) ? "Leaf" : "Leaves") %></h2>
         <% else %>
           <h2>Pile of Leaves</h2>
         <% end %>
