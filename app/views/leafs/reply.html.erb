@@ -2,150 +2,139 @@
   <div class="span12">
     <div class="leaf-index">
       <h2>Reply Leaf</h2>                
-		<div class="leaf row" style="padding:0px;margin:0px;height:100%;">
-		  <table width="100%" style="height:100%;padding:0px;margin:0px;">
-	      <tbody>
-	      	<tr>	      		
-	      		<td>	
-	      			<%= simple_form_for(@leaf, :url => {:action => "post_reply"}, html: {class: "form-vertical"}) do |f| %>
-								<div class="leaf well-small">           
-									<div class="leaf row" style="padding:0px;margin:0px;height:100%; background-color:#FFFFFF;">
-							      <table height="100%">
-							        <thead>
-							          <tr>
-							            <th align="center" class="leaf header">
-							              Planter
-							            </th>
-							            <th align="center"  class="leaf header">
-							            	Reply Leaf
-							            </th>
-							          </tr>
-							        </thead>
-							        <tfoot>
-							        </tfoot>
-							        <tbody> 
-							          <tr>
-							            <td class="leaf span3" align="center" style="vertical-align:top;">
-							              <br/>
-							              <% if !current_user %>
-							                <img src="http://gravatar.com/avatar"/>
-							              <% else %>
-							                <img src="<%=current_user.gravatar_url %>"/>
-							              <% end %>   
-							              <br/><br/>
-							              <strong>
-							                <% if !current_user %>
-							                  Unknown
-							                <% else %>
-							                  <%= current_user.fullname %>
-							                <% end %>
-							              </strong>
-							              <br/></br/>
-							              <strong>Total Leaves:</strong> <%= current_user.leafs.count %>                         
-							              <br/></br/>
-							              <strong>Joined:</strong>
-							              <br/><%= current_user.created_at.strftime("%ar, %b %-d, %Y") %>
-							              <br/>
-							            </td>
-							            <td height="100%" class="span10" style="padding-top:10px;padding-bottom:5px;">
+	
+			
+			<div class="leaf well-small">           
+				<div class="leaf row" style="padding:0px;margin:0px;height:100%; background-color:#FFFFFF;">
+		      <table height="100%"  >
+		        <thead>
+		          <tr>
+		            <th align="center" class="leaf header">
+		              Planter
+		            </th>
+		            <th align="center" class="leaf header" style="height:28px;">
+									Reply Leaf
+		            </th>
+		          </tr>
+		        </thead>
+		        <tfoot>
+		        </tfoot>
+		        <tbody> 
+		          <tr>
+		            <td class="leaf span3" align="center" style="vertical-align:top;">
+		              <br/>
+		              <% if !current_user %>
+		                <img src="http://gravatar.com/avatar"/>
+		              <% else %>
+		                <img src="<%=current_user.gravatar_url %>"/>
+		              <% end %>   
+		              <br/><br/>
+		              <strong>
+		                <% if !current_user %>
+		                  Unknown
+		                <% else %>
+		                  <%= current_user.fullname %>
+		                <% end %>
+		              </strong>
+		              <br/></br/>
+		              <strong>Planted:</strong>
+		              <br/>
+		              Not Planted Yet
+		              <br/><br/>
+		              <strong>Total Leaves:</strong> <%= current_user.leafs.count %>                         
+		              <br/></br/>
+		              <strong>Joined:</strong>
+		              <br/><%= current_user.created_at.strftime("%ar, %b %-d, %Y") %>
+		              <br/>
+		            </td>
+		            <td height="100%" class="span10" style="padding-top:10px;padding-bottom:5px;">
+		              <% if @leaf %>
+		                <div style="height:100%; width:100%; padding-top:10px;" align="center">
+		                	<% if @leaf.errors.any? %>
+												<div id="error_explanation">
+												  <h2><%= pluralize(@leaf.errors.count, "error") %> prohibited this leaf from being saved:</h2>
+												  <ul>
+												  <% @leaf.errors.full_messages.each do |msg| %>
+												    <li><%= msg %></li>
+												  <% end %>
+												  </ul>	
+												</div>
+											<% end %>
+											<%= simple_form_for(@leaf, :url => {:action => "post_reply"}, html: {class: "form-vertical"}) do |f| %>
+										  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'}, :autofocus => true, label: false, placeholder:'Remember, stay leafy!' %>
 
+									    	<%= f.submit 'Plant Reply Leaf', :class => 'btn btn-primary' %>
+												<%= link_to "Cancel", @original_leaf, :class => 'btn btn-primary' %>
+											<% end %>	
+		                </div>                       
+		              <% end %>
+		            </td>
+		          </tr>  
+		        </tbody>  
+		      </table>
+				</div>
+			</div>
+			
+			<div class="leaf well-small">           
+				<div class="leaf row" style="padding:0px;margin:0px;height:100%; background-color:#FFFFFF;">
+		      <table height="100%"  >
+		        <thead>
+		          <tr>
+		            <th align="center" class="leaf header">
+		              Planter
+		            </th>
+		            <th align="center" class="leaf header" style="height:28px;">
+									Original Leaf
+		            </th>
+		          </tr>
+		        </thead>
+						<tfoot></tfoot>
+						<tbody> 
+  					<tr>
+	            <td class="leaf span3" align="center" style="vertical-align:top;">
+	              <br/>
+	              <% if !@original_leaf || !@original_leaf.user %>
+	                <img src="http://gravatar.com/avatar"/>
+	              <% else %>
+	                <img src="<%=@original_leaf.user.gravatar_url %>"/>
+	              <% end %>   
+	              <br/><br/>
+	              <strong>
+	                <% if !@original_leaf || !@original_leaf.user %>
+	                  Unknown
+	                <% else %>
+	                  <%= @original_leaf.user.fullname %>
+	                <% end %>
+	              </strong>
+	              <br/></br/>
+	              <strong>Last Watered:</strong>
+	              <br/><%= @original_leaf.updated_at %>
+	              <br/><br/>
+	              <strong>Planted:</strong>
+	              <br/>
+	              <%= @original_leaf.created_at  %>
+	              <br/><br/>
 
-							              <% if @leaf %>
-							                <div style="height:100%; width:100%; padding-top:10px;" align="center">
-							                	<% if @leaf.errors.any? %>
-																<div id="error_explanation">
-																  <h2><%= pluralize(@leaf.errors.count, "error") %> prohibited this leaf from being saved:</h2>
-																  <ul>
-																  <% @leaf.errors.full_messages.each do |msg| %>
-																    <li><%= msg %></li>
-																  <% end %>
-																  </ul>	
-																</div>
-															<% end %>
-
-													  	<%= f.input :content, :input_html => {:rows => 15, :style => 'width: 90%'}, :autofocus => true, label: false, placeholder:'Remember, stay leafy!' %>
-
-												    	<%= f.submit 'Plant Reply Leaf', :class => 'btn btn-primary' %>
-															<%= link_to "Cancel", @original_leaf, :class => 'btn btn-primary' %>	
-							                </div>  
-							                <br/>                      
-							              <% end %>
-							            </td>
-							          </tr>  
-							        </tbody>  
-							      </table>
-									</div>
-								</div>
-							<% end %>
-						</td>
-					</tr>	      	
-	     		<tr>	      		
-	      		<td width="100%" height="100%">
-     					<div class="leaf well-small">           
-								<div class="leaf row" style="padding:0px;margin:0px;height:100%; background-color:#FFFFFF;">
-						      <table height="100%"  >
-						        <thead>
-						          <tr>
-						            <th align="center" class="leaf header">
-						              Planter
-						            </th>
-						            <th align="center" class="leaf header" style="height:28px;">
-													Original Leaf
-						            </th>
-						          </tr>
-						        </thead>
-        						<tfoot></tfoot>
-										<tbody> 
-          					<tr>
-					            <td class="leaf span3" align="center" style="vertical-align:top;">
-					              <br/>
-					              <% if !@original_leaf || !@original_leaf.user %>
-					                <img src="http://gravatar.com/avatar"/>
-					              <% else %>
-					                <img src="<%=@original_leaf.user.gravatar_url %>"/>
-					              <% end %>   
-					              <br/><br/>
-					              <strong>
-					                <% if !@original_leaf || !@original_leaf.user %>
-					                  Unknown
-					                <% else %>
-					                  <%= @original_leaf.user.fullname %>
-					                <% end %>
-					              </strong>
-					              <br/></br/>
-					              <strong>Last Watered:</strong>
-					              <br/><%= @original_leaf.updated_at %>
-					              <br/><br/>
-					              <strong>Planted:</strong>
-					              <br/>
-					              <%= @original_leaf.created_at  %>
-					              <br/><br/>
-
-					              <strong>Total Leaves:</strong> <%= @original_leaf.user.leafs.count %>                         
-					              <br/></br/>
-					              <strong>Joined:</strong>
-					              <br/><%= @original_leaf.user.created_at.strftime("%ar, %b %-d, %Y") %>
-					              <br/>
-					              <br/>
-					            </td>
-					            <td height="100%" class="span10" style="padding-top:15px;padding-bottom:10px;">
-					              <% if @original_leaf %>
-					                <div style="height:100%; width:100%; padding-top:10px; padding-left:10px; padding-right:10px;">
-					                  <%= @original_leaf.content %>
-					                </div>  
-					                <br/>                      
-					              <% end %>
-					            </td>
-          					</tr>  
-        						</tbody>  
-      						</table>
-								</div>
-							</div>	
-						</td>
-					</tr>
-				</tbody>
-			</table>
+	              <strong>Total Leaves:</strong> <%= @original_leaf.user.leafs.count %>                         
+	              <br/></br/>
+	              <strong>Joined:</strong>
+	              <br/><%= @original_leaf.user.created_at.strftime("%ar, %b %-d, %Y") %>
+	              <br/>
+	              <br/>
+	            </td>
+	            <td height="100%" class="span10" style="padding-top:15px;padding-bottom:10px;">
+	              <% if @original_leaf %>
+	                <div style="height:100%; width:100%; padding-top:10px; padding-left:10px; padding-right:10px;">
+	                  <%= @original_leaf.content %>
+	                </div>  
+	                <br/>                      
+	              <% end %>
+	            </td>
+  					</tr>  
+						</tbody>  
+					</table>
+				</div>
+			</div>	
     </div>
   </div>
 </div> 
-</div>

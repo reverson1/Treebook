@@ -5,6 +5,7 @@ class LeafsController < ApplicationController
   # GET /leafs
   # GET /leafs.json
   def index
+    #get only original leaves - no replies
     @leafs = Leaf.where("original_id = '' or original_id is null").order("id DESC")
 
     respond_to do |format|
@@ -17,7 +18,11 @@ class LeafsController < ApplicationController
   # GET /leafs/1.json
   def show   
     @leafs = Array.new
+
+    # get and add original leaf to leafs collection
     @leafs.concat(Leaf.where("id = #{params[:id]}"))
+
+    # get and add reply leaves to leafs collection
     @leafs.concat(Leaf.where("original_id = #{params[:id]}").order("updated_at DESC"))
 
     respond_to do |format|
@@ -40,7 +45,7 @@ class LeafsController < ApplicationController
   #get original leaf
   @original_leaf = Leaf.find(params[:id])
 
-  #create reply leaf
+  #create reply leaf and populate
   @leaf = Leaf.new
   @leaf.content = params[:content]
   @leaf.user_id = current_user[:id]
@@ -106,10 +111,37 @@ class LeafsController < ApplicationController
   # DELETE /leafs/1
   # DELETE /leafs/1.json
   def destroy
-    @leaf.destroy
-    respond_to do |format|
-      format.html { redirect_to leafs_url }
-      format.json { head :no_content }
+    if(@leaf)
+
+      #check if original or reply leaf
+      if(@leaf.original_id != '') #is this an original leaf
+        #get the reply count
+        reply_count = Leaf.where("original_id = #{@leaf.original_id}").count
+
+        #if reply count == 1, then redirect to the leafs_url
+        #else, redirect to the original thread
+        if(reply_count == 1)
+          #redirect to the original leaves thread
+          redirect_url = leafs_url
+        else
+          #redirect to the original thread
+          redirect_url = Leaf.find(@leaf.original_id)
+        end
+      
+      #this is an original thread
+      else
+        #redirect to the original leaves thread
+        redirect_url = leafs_url
+      end
+
+      #delete the leaf
+      @leaf.destroy
+
+      #render the redirected page
+      respond_to do |format|
+        format.html { redirect_to redirect_url, notice: !reply_count ? 'Leaf was successfully deleted.' : 'Reply leaf was successfully deleted.' }
+        format.json { head :no_content }
+      end
     end
   end
 
