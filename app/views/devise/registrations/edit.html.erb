@@ -30,7 +30,7 @@
               <br/></br/>
               <strong>Leaves:</strong> <%= current_user.leafs.count %>                         
               <br/></br/>
-              <strong>Joined:</strong><br><%= current_user.created_at.strftime("%ar, %b %-d, %Y") %>
+              <strong>Joined:</strong><br><%= current_user.created_at.strftime("%a, %b %-d, %Y") %>
               <br/><br/>
               <%= link_to 'Close Account', registration_path(resource_name), :data =>  {:confirm => "Are you sure?"} , :method => :delete, :class => 'btn btn-primary' %>                              
             </td>
