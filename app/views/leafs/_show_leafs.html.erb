@@ -82,7 +82,7 @@
                 <br/>              
                 <div align="center">                  
                   <% if user_signed_in? %>
-                    <% if leaf && leaf.original_id == 0 %>
+                    <% if leaf && !leaf.original_id %>
                       <%= link_to "Reply to Leaf", reply_leaf_path, class: "btn btn-success" %>
                     <% end %>
                     <% if current_user && leaf.user_id == current_user.id %>
