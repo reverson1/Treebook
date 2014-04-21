@@ -135,7 +135,7 @@ class LeafsController < ApplicationController
     if(@leaf)
 
       #check if original or reply leaf
-      if(@leaf.original_id != '') #is this an original leaf
+      if(@leaf.original_id && @leaf.original_id != '') #is this an original leaf
         #get the reply count
         reply_count = Leaf.where("original_id = #{@leaf.original_id}").count
 
