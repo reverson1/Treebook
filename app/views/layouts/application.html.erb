@@ -58,7 +58,7 @@
 
 				<% if user_signed_in? %>
 					<a href="<%= vanity %>" class="brand"> Treebook</a>
-					<%= link_to 'All Leaves', feed_path , :class => 'btn btn-primary'  %>
+					<%= link_to 'Pile of Leaves', feed_path , :class => 'btn btn-primary'  %>
 				<% else %>
 					<a href="<%= register_path %>" class="brand"> Treebook</a>
 				<% end %>
